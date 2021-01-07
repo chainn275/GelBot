@@ -75,7 +75,7 @@ async def gelratings(ctx):
 
 @bot.command()
 async def pic(ctx, *tags):
-    if tags[0] == "re":
+    if tags[0] == "rq" or tags[0] == "re":
         if ctx.channel.is_nsfw():
             img = get_gelImage(tags)
             return await ctx.send(img)

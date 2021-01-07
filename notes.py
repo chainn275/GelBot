@@ -34,5 +34,7 @@ rs - rating safe - mostly SFW content,
 rq - rating questionable - mostly NSFW, well questionable content,
 re - rating explicit - definitely unquestionable NSFW content.
 
+For r-questionable and r-explicit NSFW channel is required.
+
 If you don't use any, GelBot will look within all of them simultaneously.
 """
