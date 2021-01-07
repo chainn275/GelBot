@@ -80,7 +80,7 @@ async def pic(ctx, *tags):
             img = get_gelImage(tags)
             return await ctx.send(img)
         else:
-            message = "For explicit rating NSFW channel is required!"
+            message = "For questionable or explicit rating NSFW channel is required!"
             return await ctx.send(message)
 
     img = get_gelImage(tags)
