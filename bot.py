@@ -13,6 +13,7 @@ bot_token = os.environ["BOT_TOKEN"]
 def get_gelImage(tags):
     tags = list(tags)
     formatted_tags = ""
+
     ratings = {
         "re": "rating%3aexplicit",
         "rq": "rating%3aquestionable",
@@ -24,6 +25,9 @@ def get_gelImage(tags):
         rating = ratings[tags[0]]
         tags.remove(tags[0])
 
+    if rating == "":
+        rating = ratings["rs"]
+
     formatted_tags = "_".join(tags).replace("/", "+")
 
     api_url = f"https://gelbooru.com/index.php?page=dapi&s=post&q=index&json=1&limit=50&tags={rating}+{formatted_tags}"
@@ -33,7 +37,7 @@ def get_gelImage(tags):
         image = random.choice(json_api_url)["file_url"]
         return image
     except ValueError:
-        return "No results with given tags or they are incorrect"
+        return "No results with given tags or they are incorrect."
 
 
 @bot.event
@@ -80,7 +84,7 @@ async def pic(ctx, *tags):
             img = get_gelImage(tags)
             return await ctx.send(img)
         else:
-            message = "For questionable or explicit rating NSFW channel is required!"
+            message = "For rating questionable or explicit NSFW channel is required!"
             return await ctx.send(message)
 
     img = get_gelImage(tags)
