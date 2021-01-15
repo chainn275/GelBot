@@ -29,7 +29,7 @@ def get_gelImage(tags):
         rating = ratings["rs"]
 
     formatted_tags = "_".join(tags).replace("/", "+")
-    
+
     print(rating, formatted_tags)
 
     api_url = f"https://gelbooru.com/index.php?page=dapi&s=post&q=index&json=1&limit=50&tags={rating}+{formatted_tags}"
@@ -81,10 +81,15 @@ async def gelratings(ctx):
 
 @bot.command()
 async def pic(ctx, *tags):
+    if not tags:
+        message = "You have to specify at least 1 tag!"
+        return await ctx.send(message)
+
     if tags[0] == "rq" or tags[0] == "re":
         if ctx.channel.is_nsfw():
             img = get_gelImage(tags)
             return await ctx.send(img)
+
         else:
             message = "For rating questionable or explicit NSFW channel is required!"
             return await ctx.send(message)
