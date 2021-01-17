@@ -11,6 +11,7 @@ bot_token = os.environ["BOT_TOKEN"]
 
 
 def get_gelImage(tags):
+    """Returns pictures from Gelbooru with given tags."""
     tags = list(tags)
     formatted_tags = ""
     rating = ""
@@ -21,14 +22,15 @@ def get_gelImage(tags):
         "rs": "rating%3asafe"
     }
 
-    if tags:
+    if tags:  # if there are any tags, check for ratings
         if tags[0] in ratings:
             rating = ratings[tags[0]]
             tags.remove(tags[0])
 
-    if rating == "":
+    if rating == "":  # if rating wasn't specified, set safe one
         rating = ratings["rs"]
 
+    # make tags suitable for Gelbooru API url
     formatted_tags = "_".join(tags).replace("/", "+")
 
     print(rating, formatted_tags)
@@ -36,6 +38,7 @@ def get_gelImage(tags):
     api_url = f"https://gelbooru.com/index.php?page=dapi&s=post&q=index&json=1&limit=50&tags={rating}+{formatted_tags}"
     response = requests.get(api_url)
     try:
+        # parsing json
         json_api_url = json.loads(response.text)
         image = random.choice(json_api_url)["file_url"]
         return image
@@ -45,45 +48,53 @@ def get_gelImage(tags):
 
 @bot.event
 async def on_ready():
+    """Sends information when the bot starts running."""
     print('We have logged in as {0.user}'.format(bot))
 
 
 @bot.event
 async def on_guild_join(guild):
+    """Triggers a message when bot joins a server."""
     for channel in guild.text_channels:
         if channel.permissions_for(guild.me).send_messages:
             await channel.send("Hey! GelBot's here! Type !gelhelp for help.")
         break
 
 
+# commands below take messages from notes.py file
 @bot.command()
 async def gelhelp(ctx):
+    """Sends help message."""
     message = help
     await ctx.send(message)
 
 
 @bot.command()
 async def gelnote(ctx):
+    """Sends disclaimer."""
     message = note
     await ctx.send(message)
 
 
 @bot.command()
 async def gelexamples(ctx):
+    """Sends examples."""
     message = examples
     await ctx.send(message)
 
 
 @bot.command()
 async def gelratings(ctx):
+    """Sends information about ratings."""
     message = ratings
     await ctx.send(message)
 
 
 @bot.command()
 async def pic(ctx, *tags):
+    """Calls get_gelImage() with tags specified by user, then sends image."""
     if "rq" in tags or "re" in tags:
-        if ctx.channel.is_nsfw():
+        if ctx.channel.is_nsfw():  # check if channel is suitable for given rating
             img = get_gelImage(tags)
             return await ctx.send(img)
 
