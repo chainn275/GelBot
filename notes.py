@@ -12,7 +12,7 @@ get pictures. !pic is what you need. Syntax:
 
 !pic [optional rating] tag/tag with a space/tag/tag
 
-"!pic" without specifying any tags will send a random picture
+"!pic" without specifying any tags will send a random picture.
 
 Type !gelexamples to get a better grasp of the command.
 

@@ -54,7 +54,7 @@ async def on_ready():
 
 @bot.event
 async def on_guild_join(guild):
-    """Triggers a message when bot joins a server."""
+    """Triggers a message when the bot joins a server."""
     for channel in guild.text_channels:
         if channel.permissions_for(guild.me).send_messages:
             await channel.send("Hey! GelBot's here! Type !gelhelp for help.")
@@ -64,21 +64,21 @@ async def on_guild_join(guild):
 # commands below take messages from notes.py file
 @bot.command()
 async def gelhelp(ctx):
-    """Sends help message."""
+    """Sends the help message."""
     message = help
     await ctx.send(message)
 
 
 @bot.command()
 async def gelnote(ctx):
-    """Sends disclaimer."""
+    """Sends the disclaimer."""
     message = note
     await ctx.send(message)
 
 
 @bot.command()
 async def gelexamples(ctx):
-    """Sends examples."""
+    """Sends the examples."""
     message = examples
     await ctx.send(message)
 
@@ -92,7 +92,7 @@ async def gelratings(ctx):
 
 @bot.command()
 async def pic(ctx, *tags):
-    """Calls get_gelImage() with tags specified by user, then sends image."""
+    """Calls get_gelImage() with tags specified by user, then sends an image."""
     if "rq" in tags or "re" in tags:
         if ctx.channel.is_nsfw():  # check if channel is suitable for given rating
             img = get_gelImage(tags)
