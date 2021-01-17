@@ -13,6 +13,7 @@ bot_token = os.environ["BOT_TOKEN"]
 def get_gelImage(tags):
     tags = list(tags)
     formatted_tags = ""
+    rating = ""
 
     ratings = {
         "re": "rating%3aexplicit",
@@ -20,10 +21,10 @@ def get_gelImage(tags):
         "rs": "rating%3asafe"
     }
 
-    rating = ""
-    if tags[0] in ratings:
-        rating = ratings[tags[0]]
-        tags.remove(tags[0])
+    if tags:
+        if tags[0] in ratings:
+            rating = ratings[tags[0]]
+            tags.remove(tags[0])
 
     if rating == "":
         rating = ratings["rs"]
@@ -81,11 +82,7 @@ async def gelratings(ctx):
 
 @bot.command()
 async def pic(ctx, *tags):
-    if not tags:
-        message = "You have to specify at least 1 tag!"
-        return await ctx.send(message)
-
-    if tags[0] == "rq" or tags[0] == "re":
+    if "rq" in tags or "re" in tags:
         if ctx.channel.is_nsfw():
             img = get_gelImage(tags)
             return await ctx.send(img)
