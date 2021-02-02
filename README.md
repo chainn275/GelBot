@@ -22,3 +22,6 @@ Main requirements:
 discord.py==1.5.1
 requests==2.25.1
 ```
+
+## License
+GelBot's code can be used for any purposes under the [MIT License](LICENSE)
