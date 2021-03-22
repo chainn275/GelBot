@@ -12,7 +12,7 @@ get pictures. !pic is what you need. Syntax:
 
 !pic [optional rating] tag/tag with a space/tag/tag
 
-"!pic" without specifying any tags will send a random picture.
+"!pic" without specifying any tags will send a random safe rated picture.
 
 Type !gelexamples to get a better grasp of the command.
 
@@ -33,7 +33,7 @@ Some examples of !pic usage:
 ratings = """
 We've got 3 ratings available:
 rs - rating safe - mostly SFW content,
-rq - rating questionable - mostly NSFW, well questionable content,
+rq - rating questionable - mostly NSFW, well... questionable content,
 re - rating explicit - definitely unquestionable NSFW content.
 
 For questionable and explicit ratings an NSFW channel is required.
