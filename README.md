@@ -15,7 +15,7 @@ Here is shown how it works in practice:
 - !gelhelp - a help command, shows you everything you need to know
 - !gelexamples - shows a couple examples of !pic usage
 - !gelratings - shows info about ratings usage
-- !gelnote - shows my disclaimer which can be found also [here](https://github.com/bubo-py/GelBot/blob/master/notes.py)
+- !gelnote - shows my disclaimer which can be found also [here](https://github.com/bubo-py/GelBot/blob/master/source/notes.py)
 
 The !pic command syntax:  
 !pic [optional rating] tag/tag with a space/tag/tag
