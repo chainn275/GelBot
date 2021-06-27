@@ -37,12 +37,15 @@ def get_gelImage(tags):
 
     api_url = f"https://gelbooru.com/index.php?page=dapi&s=post&q=index&json=1&limit=50&tags={rating}+{formatted_tags}"
     response = requests.get(api_url)
-    try:
-        # parsing json
-        json_api_url = json.loads(response.text)
+
+    # parsing json
+    json_api_url = json.loads(response.text)
+
+    # verify if there is anything within given tags
+    if json_api_url:
         image = random.choice(json_api_url)["file_url"]
         return image
-    except ValueError:
+    else:
         return "No results with given tags or they are incorrect."
 
 
